@@ -1,48 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
 }
 
+
 body {
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr 25%;
   min-height: 100vh;
   justify-items: center;
-  background-image: url(/Images/background.png);
+  background-image: url(Images/UpdatedBackground.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;          /* ✅ Prevents zoom */
   background-position: center bottom;
-  background-color: #fff;            /* Or a fallback */
 }
 
-/*social links*/
-.social-icons a {
-  margin: 0 10px;
-  display: inline-block;
-}
 
-.social-icons img {
-  width: 30px;
-  height: 30px;
-  transition: transform 0.2s ease;
-}
 
-.social-icons img:hover {
-  transform: scale(1.2);
-}
+/*Header*/
 
-/*Nav dropdown*/
-
-nav {
+header{
   position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center the h2 horizontally */
+  align-items: center;
+  padding: 1em 0;
 }
+
+header > h2 {
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 2em;
+  margin: 0;
+  z-index: 2;
+
+}
+
+.centered-word {
+  display: block;
+  text-align: center;
+}
+
 
 .hamburger {
+  position: absolute;
+  top: 20px;
+  right: 20px;
   font-size: 30px;
   cursor: pointer;
-  display: block;
-  padding: 10px;
+  z-index: 1;
+  
+ 
 }
 
 .nav-menu {
@@ -52,8 +65,8 @@ nav {
   display: none;
   background: #fff;
   position: absolute;
-  top: 40px;
-  right: 0;
+  top: 80px;
+  right: 0px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
@@ -72,6 +85,10 @@ nav {
   display: block;
 }
 
+/*Section*/
+p{
+  padding: 0 1.8em;
+}
 
 
 /* FOOTER */
@@ -81,9 +98,6 @@ footer {
   justify-content: space-between;
   align-items: center;
   padding: 1em;
-  margin-top: 2em;
-  width: 90%;
-  
   border: 1px rgb(151, 31, 31) solid;
 }
 
@@ -98,12 +112,20 @@ footer {
   flex: 1;
 }
 
-.social {
-  display: flex;
-  gap: 1em;
-  list-style: none;
-  flex: 1 1 100%;
-  justify-content: center;
+/*social links*/
+.social-icons a {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.social-icons img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
 }
 
 /* MEDIA QUERIES 
