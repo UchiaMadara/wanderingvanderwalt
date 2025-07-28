@@ -1,65 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wandering Van Der Walts</title>
-    <link href="style.css" rel="stylesheet"> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wandering Van Der Walts</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 </head>
-
-
 <body>
-        
-        <header>
-            <h2>
-                <span class="centered-word">The</span>
-                Wandering Van Der Walts
-            </h2>
 
-            <nav>
-            <div class="hamburger" id="hamburger">&#9776;</div>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home">Resources</a></li>
-                <li><a href="#about">mazon</a></li>
-                <li><a href="#services">Blog</a></li>
-                <li><a href="#contact">Sign up</a></li>
-            </ul>
-        </nav>
-        </header>
-        
-        <section>
-            <p> animi deleniti nisi dolor distinctio inventore odio vero suscipit a doloribus 
-                sequi est fugiat ipsam nam magni illum molestias itaque. Amet modi illo aliquam 
-                hic nemo molestias aspernatur similique corporis! Blanditiis vero dignissimos 
-                
-            </p>
-        </section>
-        
-        <footer>
+  <header>
+    <h1>
+      <span class="centered-word">The</span>
+      Wandering Van Der Walts
+    </h1>
+    <nav>
+      <div class="hamburger" id="hamburger">&#9776;</div>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#home">Resources</a></li>
+        <li><a href="#about">Amazon</a></li>
+        <li><a href="#services">Blog</a></li>
+        <li><a href="#contact">Sign up</a></li>
+      </ul>
+    </nav>
+  </header>
 
-            <form class="subscribe">
-                <input type="email" id="email" name="email">
-                <button>Submit</button>
+  <section>
+    <p>
+      animi deleniti nisi dolor distinctio inventore odio vero suscipit a doloribus 
+      sequi est fugiat ipsam nam magni illum molestias itaque. Amet modi illo aliquam 
+      hic nemo molestias aspernatur similique corporis!
+    </p>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="sib-form">
+        <div id="sib-form-container">
+          <div id="sib-container">
+            <form id="sib-form" method="POST" action="https://ed9d3e58.sibforms.com/serve/MUIFAKWkHB-sO73QsMB2EfcGzZhuhMCBm6_VpIZrwhNQ0mjWu8QZT_eXP3E9fINhs9AFrPt-XXMFkGm6Jo-cwL82-Sp9E7Oehn_ieRKyHaCSLyVnncZppvDokxOirzc0sWZYGBu2ylQWWXEnnN5NYt8eid_Dd8Xq2N-fHZcFKNTAZ1aDQs4ss_4DAIv5YeEj7bJ4RhPblzQShETO" data-type="subscription">
+              <p>Subscribe to be first to hear our news. No spam — just the good stuff.</p>
+
+              <input type="text" name="FIRSTNAME" placeholder="First Name" required>
+              <input type="email" name="EMAIL" placeholder="Email" required>
+
+              <label>
+                <input type="checkbox" name="OPT_IN" />
+                I agree to receive your newsletters and accept the data privacy statement.
+              </label>
+
+              <div class="g-recaptcha" data-sitekey="6Ler-Y0rAAAAAEeysQoGdfNv3zL5dWk2fzNbVo-l" data-callback="handleCaptchaResponse"></div>
+
+              <button type="submit">SUBSCRIBE</button>
+
+              <input type="text" name="email_address_check" class="input--hidden">
+              <input type="hidden" name="locale" value="en">
             </form>
-
-            <div class="social-icons">
-            <a href="https://www.facebook.com/YourPage" target="_blank" aria-label="Facebook">
-                <img src="/Images/FB-logo.png" alt="Facebook" />
-            </a>
-            <a href="https://www.instagram.com/YourPage" target="_blank" aria-label="Instagram">
-                <img src="/Images/IG-logo.jpeg" alt="Instagram" />
-            </a>
-            <a href="https://www.tiktok.com/@YourPage" target="_blank" aria-label="TikTok">
-                <img src="/Images/Tiktok-logo.png" alt="TikTok" />
-            </a>
-            <a href="https://www.youtube.com/YourChannel" target="_blank" aria-label="YouTube">
-                <img src="/Images/YouTube-logo.png" alt="YouTube" />
-            </a>
+          </div>
         </div>
+      </div>
 
-        </footer>
-    
-    
-    <script src="main.js"></script>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/YourPage" target="_blank"><img src="/Images/FB-logo.png" alt="Facebook" /></a>
+        <a href="https://www.instagram.com/YourPage" target="_blank"><img src="/Images/IG-logo.jpeg" alt="Instagram" /></a>
+        <a href="https://www.tiktok.com/@YourPage" target="_blank"><img src="/Images/Tiktok-logo.png" alt="TikTok" /></a>
+        <a href="https://www.youtube.com/YourChannel" target="_blank"><img src="/Images/YouTube-logo.png" alt="YouTube" /></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
 </body>
 </html>
