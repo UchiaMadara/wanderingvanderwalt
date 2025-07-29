@@ -7,21 +7,19 @@
 }
 
 html, body {
-  height: 100%;
+  height: 100vh;
   font-family: Helvetica, sans-serif;
-  background-image: url(Images/UpdatedBackground.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center bottom;
-  overflow-x: hidden;
+  width: 100%;
+  background-color: rgb(253, 241, 46)
+ 
 }
-
-/* HEADER */
 header {
   width: 100%;
   padding: 1em 1em;
   text-align: center;
   position: relative;
+  height: 10vh;
+  
 }
 
 header h1 {
@@ -35,7 +33,7 @@ header h1 {
 
 .hamburger {
   position: absolute;
-  top: 1em;
+  top: .7em;
   right: 1em;
   font-size: 30px;
   cursor: pointer;
@@ -67,15 +65,30 @@ header h1 {
 }
 
 /* SECTION */
+
+section{
+  margin-top: 1em;
+  display: grid;
+  justify-items: center;
+}
+
 section p {
   padding: 1em;
   font-size: 1rem;
+  
+  
+}
+
+section > img{
+max-width: 100%;
+  
 }
 
 /* FOOTER */
 footer {
+  margin-top: 1.2em;
   padding: 1em;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.2);
   width: 100%;
 }
 
