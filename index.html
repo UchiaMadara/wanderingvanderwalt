@@ -27,12 +27,11 @@
 
   <section>
     <p>
-      animi deleniti nisi dolor distinctio inventore 
+      A family of four who sold everything to slow travel the world together. Join us for inspiration,
+      free travel resources and top tips.
     </p>
     <img src="/Images/LandingImg.png" alt="Image of a family walking toward a palmtree, the dad is pulling a suitcase. There is a plane and train in the background insinuating that they are travellers">
   </section>
-
-
 
   <footer>
     <div class="footer-container">
@@ -40,19 +39,28 @@
         <div id="sib-form-container">
           <div id="sib-container">
             <form id="sib-form" method="POST" action="https://ed9d3e58.sibforms.com/serve/MUIFAKWkHB-sO73QsMB2EfcGzZhuhMCBm6_VpIZrwhNQ0mjWu8QZT_eXP3E9fINhs9AFrPt-XXMFkGm6Jo-cwL82-Sp9E7Oehn_ieRKyHaCSLyVnncZppvDokxOirzc0sWZYGBu2ylQWWXEnnN5NYt8eid_Dd8Xq2N-fHZcFKNTAZ1aDQs4ss_4DAIv5YeEj7bJ4RhPblzQShETO" data-type="subscription">
-              <p>Subscribe to be first to hear our news. No spam — just the good stuff.</p>
+              <p>Subscribe below to have first access to our travel journals, free resources and good news.</p>
 
               <input type="text" name="FIRSTNAME" placeholder="First Name" required>
               <input type="email" name="EMAIL" placeholder="Email" required>
 
-              <label>
+              <label class="optin-checkbox">
                 <input type="checkbox" name="OPT_IN" />
-                I agree to receive your newsletters and accept the data privacy statement.
+                <span>I agree to receive your newsletters and accept the data privacy statement.</span>
               </label>
 
-              <div class="g-recaptcha" data-sitekey="6Ler-Y0rAAAAAEeysQoGdfNv3zL5dWk2fzNbVo-l" data-callback="handleCaptchaResponse"></div>
+              <!-- reCAPTCHA hidden initially -->
+              <div id="captcha-container" style="display: none; margin-top: 10px;">
+                <div
+                  class="g-recaptcha"
+                  data-sitekey="6Ler-Y0rAAAAAEeysQoGdfNv3zL5dWk2fzNbVo-l"
+                  data-callback="onCaptchaSuccess"
+                  data-expired-callback="onCaptchaExpired"
+                ></div>
+              </div>
 
-              <button type="submit">SUBSCRIBE</button>
+              <!-- Button changed to prevent auto-submit -->
+              <button type="button" id="subscribe-btn">SUBSCRIBE</button>
 
               <input type="text" name="email_address_check" class="input--hidden">
               <input type="hidden" name="locale" value="en">
@@ -62,14 +70,18 @@
       </div>
 
       <div class="social-icons">
-        <a href="https://www.facebook.com/YourPage" target="_blank"><img src="/Images/FB-logo.png" alt="Facebook" /></a>
-        <a href="https://www.instagram.com/YourPage" target="_blank"><img src="/Images/IG-logo.jpeg" alt="Instagram" /></a>
-        <a href="https://www.tiktok.com/@YourPage" target="_blank"><img src="/Images/Tiktok-logo.png" alt="TikTok" /></a>
-        <a href="https://www.youtube.com/YourChannel" target="_blank"><img src="/Images/YouTube-logo.png" alt="YouTube" /></a>
+        <a href="https://web.facebook.com/profile.php?id=61577602594821" target="_blank"><img src="/Images/FB-logo.png" alt="Facebook" /></a>
+        <a href="https://www.instagram.com/wanderingvanderwalts" target="_blank"><img src="/Images/IG-logo.jpeg" alt="Instagram" /></a>
+        <a href="https://www.tiktok.com/@wandering_vanderwalts?lang=en-GB" target="_blank"><img src="/Images/Tiktok-logo.png" alt="TikTok" /></a>
+        <a href="https://www.youtube.com/@wanderingvdws" target="_blank"><img src="/Images/YouTube-logo.png" alt="YouTube" /></a>
       </div>
     </div>
   </footer>
 
+  <!-- External JS files -->
   <script src="main.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="recaptcha-handler.js"></script>
+
 </body>
 </html>
