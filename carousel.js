@@ -1,108 +1,100 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-  // ------------------------------
- // ------------------------------
-// Journey Carousel (<576px only, Infinite Loop + Swipe)
-// ------------------------------
-const journeyTrack = document.getElementById("journey-carousel");
-const journeyPrev = document.getElementById("journey-prev");
-const journeyNext = document.getElementById("journey-next");
-const journeyCards = journeyTrack ? journeyTrack.querySelectorAll(".card") : [];
+  // ======================================================
+  // JOURNEY CAROUSEL (<576px only, infinite loop + swipe)
+  // ======================================================
 
-let journeyIndex = 0;
+  const journeyTrack = document.getElementById("journey-carousel");
+  const journeyPrev = document.getElementById("journey-prev");
+  const journeyNext = document.getElementById("journey-next");
+  const journeyCards = journeyTrack
+    ? journeyTrack.querySelectorAll(".card")
+    : [];
 
-function updateJourneyCarousel() {
-  if (!journeyTrack || journeyCards.length === 0) return;
+  let journeyIndex = 0;
 
-  if (window.innerWidth >= 576) {
-    journeyTrack.style.transform = "none";
-    return;
-  }
+  function updateJourneyCarousel() {
+    if (!journeyTrack || journeyCards.length === 0) return;
 
-  const cardWidth = journeyCards[0].offsetWidth + 16;
-  journeyTrack.style.transform = `translateX(-${journeyIndex * cardWidth}px)`;
-}
-
-// NEXT with looping
-function nextJourney() {
-  if (window.innerWidth >= 576) return;
-
-  journeyIndex++;
-
-  if (journeyIndex >= journeyCards.length) {
-    journeyIndex = 0; // Loop back to first
-  }
-
-  updateJourneyCarousel();
-}
-
-// PREV with looping
-function prevJourney() {
-  if (window.innerWidth >= 576) return;
-
-  journeyIndex--;
-
-  if (journeyIndex < 0) {
-    journeyIndex = journeyCards.length - 1; // Loop to last
-  }
-
-  updateJourneyCarousel();
-}
-
-if (journeyNext) {
-  journeyNext.addEventListener("click", nextJourney);
-}
-
-if (journeyPrev) {
-  journeyPrev.addEventListener("click", prevJourney);
-}
-
-window.addEventListener("resize", updateJourneyCarousel);
-updateJourneyCarousel();
-
-
-// ------------------------------
-// Swipe Support
-// ------------------------------
-let startX = 0;
-let endX = 0;
-
-if (journeyTrack) {
-  journeyTrack.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-  });
-
-  journeyTrack.addEventListener("touchmove", (e) => {
-    endX = e.touches[0].clientX;
-  });
-
-  journeyTrack.addEventListener("touchend", () => {
-    if (window.innerWidth >= 576) return;
-
-    const delta = endX - startX;
-
-    if (Math.abs(delta) > 50) {
-      if (delta < 0) {
-        nextJourney(); // Swipe left
-      } else {
-        prevJourney(); // Swipe right
-      }
+    if (window.innerWidth >= 576) {
+      journeyTrack.style.transform = "none";
+      return;
     }
-  });
-}
 
+    const card = journeyCards[journeyIndex];
+    const container = journeyTrack.parentElement;
+
+    const cardCenter =
+      card.offsetLeft + card.offsetWidth / 2;
+
+    const containerCenter =
+      container.clientWidth / 2;
+
+    const offset = cardCenter - containerCenter;
+
+    journeyTrack.style.transform = `translateX(-${offset}px)`;
+  }
+
+  function nextJourney() {
+    if (window.innerWidth >= 576) return;
+    journeyIndex = (journeyIndex + 1) % journeyCards.length;
+    updateJourneyCarousel();
+  }
+
+  function prevJourney() {
+    if (window.innerWidth >= 576) return;
+    journeyIndex =
+      (journeyIndex - 1 + journeyCards.length) % journeyCards.length;
+    updateJourneyCarousel();
+  }
+
+  if (journeyNext) journeyNext.addEventListener("click", nextJourney);
+  if (journeyPrev) journeyPrev.addEventListener("click", prevJourney);
+
+  window.addEventListener("resize", updateJourneyCarousel);
+  window.addEventListener("load", updateJourneyCarousel);
+  updateJourneyCarousel();
 
   // ------------------------------
-  // Featured Carousel (<768px only)
+  // Swipe Support (iOS SAFE)
   // ------------------------------
+  let startX = 0;
+  let endX = 0;
+
+  if (journeyTrack) {
+    journeyTrack.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      endX = startX; // ✅ required for iOS
+    });
+
+    journeyTrack.addEventListener("touchmove", (e) => {
+      endX = e.touches[0].clientX;
+    });
+
+    journeyTrack.addEventListener("touchend", () => {
+      if (window.innerWidth >= 576) return;
+
+      const delta = endX - startX;
+
+      if (Math.abs(delta) > 50) {
+        delta < 0 ? nextJourney() : prevJourney();
+      }
+    });
+  }
+
+  // ======================================================
+  // FEATURED CAROUSEL (<768px only, auto slide)
+  // ======================================================
+
   const featuredTrack = document.querySelector(".featured-track");
   const featuredPrev = document.getElementById("featured-prev");
   const featuredNext = document.getElementById("featured-next");
-  const featuredLogos = featuredTrack ? Array.from(featuredTrack.children) : [];
+  const featuredLogos = featuredTrack
+    ? Array.from(featuredTrack.children)
+    : [];
 
   let featuredIndex = 0;
   const featuredVisibleCount = 1;
-  const autoSlideInterval = 2000; // 2s
+  const autoSlideInterval = 2000;
   let autoSlideTimer = null;
 
   function updateFeaturedCarousel() {
@@ -114,26 +106,24 @@ if (journeyTrack) {
     }
 
     const logoWidth = featuredLogos[0].offsetWidth + 32;
-    featuredTrack.style.transform = `translateX(${-featuredIndex * logoWidth}px)`;
+    featuredTrack.style.transform = `translateX(-${featuredIndex * logoWidth}px)`;
   }
 
   function nextFeaturedSlide() {
     if (window.innerWidth >= 768) return;
-    if (featuredIndex < featuredLogos.length - featuredVisibleCount) {
-      featuredIndex++;
-    } else {
-      featuredIndex = 0;
-    }
+    featuredIndex =
+      featuredIndex < featuredLogos.length - featuredVisibleCount
+        ? featuredIndex + 1
+        : 0;
     updateFeaturedCarousel();
   }
 
   function prevFeaturedSlide() {
     if (window.innerWidth >= 768) return;
-    if (featuredIndex > 0) {
-      featuredIndex--;
-    } else {
-      featuredIndex = featuredLogos.length - featuredVisibleCount;
-    }
+    featuredIndex =
+      featuredIndex > 0
+        ? featuredIndex - 1
+        : featuredLogos.length - featuredVisibleCount;
     updateFeaturedCarousel();
   }
 
@@ -154,6 +144,7 @@ if (journeyTrack) {
   if (featuredPrev) featuredPrev.addEventListener("click", prevFeaturedSlide);
 
   startAutoSlide();
+
   window.addEventListener("resize", () => {
     stopAutoSlide();
     startAutoSlide();
