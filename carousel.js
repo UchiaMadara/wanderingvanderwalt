@@ -54,32 +54,33 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("load", updateJourneyCarousel);
   updateJourneyCarousel();
 
-  // ------------------------------
-  // Swipe Support (iOS SAFE)
-  // ------------------------------
-  let startX = 0;
-  let endX = 0;
+ 
+  
+// Swipe Support (iOS FIXED)
+let startX = 0;
+let endX = 0;
 
-  if (journeyTrack) {
-    journeyTrack.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-      endX = startX; // ✅ required for iOS
-    });
+if (journeyTrack) {
+  journeyTrack.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+    endX = startX;
+  }, { passive: true });
 
-    journeyTrack.addEventListener("touchmove", (e) => {
-      endX = e.touches[0].clientX;
-    });
+  journeyTrack.addEventListener("touchmove", (e) => {
+    endX = e.touches[0].clientX;
+  }, { passive: false }); // <<< IMPORTANT FOR IOS
 
-    journeyTrack.addEventListener("touchend", () => {
-      if (window.innerWidth >= 576) return;
+  journeyTrack.addEventListener("touchend", () => {
+    if (window.innerWidth >= 576) return;
 
-      const delta = endX - startX;
+    const delta = endX - startX;
 
-      if (Math.abs(delta) > 50) {
-        delta < 0 ? nextJourney() : prevJourney();
-      }
-    });
-  }
+    if (Math.abs(delta) > 50) {
+      delta < 0 ? nextJourney() : prevJourney();
+    }
+  });
+}
+
 
   // ======================================================
   // FEATURED CAROUSEL (<768px only, auto slide)
