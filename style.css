@@ -36,7 +36,7 @@ h1, h2, h3 {
   cursor: pointer;
   background: none;
   border: none;
-  color: white;
+  color: rgb(187, 175, 175);
   z-index: 2001;
   transition: transform 0.3s ease;
 }
@@ -222,12 +222,18 @@ section {
   overflow: hidden;
   max-width: 900px;
   margin: auto;
+  overscroll-behavior: contain;
 }
 .carousel-inner {
   display: flex;
   transition: transform 0.5s ease;
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
+  will-change: transform;
+}
+
+.carousel-inner.is-swiping {
+  transition: none !important;
 }
 .card {
   min-width: 90%;

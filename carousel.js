@@ -3,33 +3,27 @@ document.addEventListener("DOMContentLoaded", () => {
   // JOURNEY CAROUSEL (<576px only, infinite loop + swipe)
   // ======================================================
 
-  const journeyTrack = document.getElementById("journey-carousel");
-  const journeyPrev = document.getElementById("journey-prev");
-  const journeyNext = document.getElementById("journey-next");
-  const journeyCards = journeyTrack
-    ? journeyTrack.querySelectorAll(".card")
-    : [];
+  // ======================================================
+// JOURNEY CAROUSEL (<576px only, smooth iOS swipe FIXED)
+// ======================================================
 
+const journeyTrack = document.getElementById("journey-carousel");
+const journeyPrev = document.getElementById("journey-prev");
+const journeyNext = document.getElementById("journey-next");
+
+if (journeyTrack) {
+  const journeyCards = journeyTrack.querySelectorAll(".card");
   let journeyIndex = 0;
 
   function updateJourneyCarousel() {
-    if (!journeyTrack || journeyCards.length === 0) return;
-
     if (window.innerWidth >= 576) {
       journeyTrack.style.transform = "none";
       return;
     }
 
-    const card = journeyCards[journeyIndex];
-    const container = journeyTrack.parentElement;
-
-    const cardCenter =
-      card.offsetLeft + card.offsetWidth / 2;
-
-    const containerCenter =
-      container.clientWidth / 2;
-
-    const offset = cardCenter - containerCenter;
+    const cardWidth = journeyCards[0].getBoundingClientRect().width;
+    const gap = 16; // matches CSS margin (0.5rem * 2)
+    const offset = journeyIndex * (cardWidth + gap);
 
     journeyTrack.style.transform = `translateX(-${offset}px)`;
   }
@@ -54,33 +48,40 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("load", updateJourneyCarousel);
   updateJourneyCarousel();
 
- 
-  
-// Swipe Support (iOS FIXED)
-let startX = 0;
-let endX = 0;
+  // ---------- iOS Swipe Support ----------
+  let startX = 0;
+  let endX = 0;
 
-if (journeyTrack) {
-  journeyTrack.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-    endX = startX;
-  }, { passive: true });
+  journeyTrack.addEventListener(
+    "touchstart",
+    (e) => {
+      startX = e.touches[0].clientX;
+      endX = startX;
+      journeyTrack.classList.add("is-swiping");
+    },
+    { passive: true }
+  );
 
-  journeyTrack.addEventListener("touchmove", (e) => {
-    endX = e.touches[0].clientX;
-  }, { passive: false }); // <<< IMPORTANT FOR IOS
+  journeyTrack.addEventListener(
+    "touchmove",
+    (e) => {
+      endX = e.touches[0].clientX;
+      e.preventDefault(); // IMPORTANT: stop page scroll on iOS
+    },
+    { passive: false }
+  );
 
   journeyTrack.addEventListener("touchend", () => {
+    journeyTrack.classList.remove("is-swiping");
+
     if (window.innerWidth >= 576) return;
 
     const delta = endX - startX;
-
     if (Math.abs(delta) > 50) {
       delta < 0 ? nextJourney() : prevJourney();
     }
   });
 }
-
 
   // ======================================================
   // FEATURED CAROUSEL (<768px only, auto slide)
