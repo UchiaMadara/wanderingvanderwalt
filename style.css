@@ -5,11 +5,18 @@ body {
   background: #fef3c7;
   color: #333;
 }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
 
 h1, h2, h3 {
   font-family: 'Playfair Display', serif;
 }
-
+ p{
+  font-family: 'Poppins', sans-serif;
+ }
 /* --- HEADER & HAMBURGER --- */
 .header {
   position: fixed;

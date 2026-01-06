@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const journeyTrack = document.getElementById("journey-carousel");
 const journeyPrev = document.getElementById("journey-prev");
 const journeyNext = document.getElementById("journey-next");
+let currentOffset = 0;
 
 if (journeyTrack) {
   const journeyCards = journeyTrack.querySelectorAll(".card");
@@ -22,7 +23,9 @@ if (journeyTrack) {
     const gap = 16; // matches CSS margin (0.5rem * 2)
     const offset = journeyIndex * (cardWidth + gap);
 
-    journeyTrack.style.transform = `translateX(-${offset}px)`;
+    currentOffset = -offset;
+    journeyTrack.style.transform = `translateX(${currentOffset}px)`;
+
   }
 
   function nextJourney() {
@@ -75,43 +78,48 @@ journeyTrack.addEventListener(
     const dy = t.clientY - startY;
     endX = t.clientX;
 
-    // Decide intent AFTER slight movement
+    // Decide intent
     if (!lockDirection) {
       if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
-
       lockDirection = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
-
-      if (lockDirection === "x") {
-        journeyTrack.classList.add("is-swiping");
-      }
     }
 
-    // Vertical scroll → allow page to scroll
+    // Allow vertical scroll
     if (lockDirection === "y") return;
 
-    // Horizontal swipe → block scroll
+    // Horizontal swipe
     e.preventDefault();
+    journeyTrack.classList.add("is-swiping");
+
+    // 🔥 THIS IS THE KEY LINE
+    journeyTrack.style.transform = `translateX(${currentOffset + dx}px)`;
   },
   { passive: false }
 );
+
 
 function endSwipe() {
   journeyTrack.classList.remove("is-swiping");
   isDragging = false;
 
-  if (lockDirection !== "x" || window.innerWidth >= 576) return;
+  if (lockDirection !== "x" || window.innerWidth >= 576) {
+    journeyTrack.style.transform = `translateX(${currentOffset}px)`;
+    return;
+  }
 
   const delta = endX - startX;
+
   if (Math.abs(delta) > 50) {
     delta < 0 ? nextJourney() : prevJourney();
+  } else {
+    // 🔥 SNAP BACK if swipe was too small
+    journeyTrack.style.transform = `translateX(${currentOffset}px)`;
   }
 }
-
 journeyTrack.addEventListener("touchend", endSwipe);
 journeyTrack.addEventListener("touchcancel", endSwipe);
 
 
-}
 
   // ======================================================
   // FEATURED CAROUSEL (<768px only, auto slide)
