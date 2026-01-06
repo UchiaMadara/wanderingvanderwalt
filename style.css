@@ -1,22 +1,15 @@
 /* General */
 body {
   margin: 0;
-  font-family: "Dancing Script",'Poppins', sans-serif;
+  font-family: "Dancing Script",'Poppins' sans-serif;
   background: #fef3c7;
   color: #333;
 }
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
-
 
 h1, h2, h3 {
   font-family: 'Playfair Display', serif;
 }
- p{
-  font-family: 'Poppins', sans-serif;
- }
+
 /* --- HEADER & HAMBURGER --- */
 .header {
   position: fixed;
@@ -226,25 +219,22 @@ section {
 /* --- JOURNEY CAROUSEL --- */
 .carousel {
   position: relative;
+  overflow: hidden;
   max-width: 900px;
   margin: auto;
-  overflow-x: hidden;
-  overflow-y: visible;
+  overscroll-behavior: contain;
 }
-
 .carousel-inner {
   display: flex;
   transition: transform 0.5s ease;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
   will-change: transform;
-
-  /* iOS-safe */
-  touch-action: manipulation;
 }
 
 .carousel-inner.is-swiping {
   transition: none !important;
 }
-
 .card {
   min-width: 90%;
   background: white;

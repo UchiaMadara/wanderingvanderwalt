@@ -3,11 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // JOURNEY CAROUSEL (<576px only, infinite loop + swipe)
   // ======================================================
 
+  // ======================================================
+// JOURNEY CAROUSEL (<576px only, smooth iOS swipe FIXED)
+// ======================================================
 
 const journeyTrack = document.getElementById("journey-carousel");
 const journeyPrev = document.getElementById("journey-prev");
 const journeyNext = document.getElementById("journey-next");
-let currentOffset = 0;
 
 if (journeyTrack) {
   const journeyCards = journeyTrack.querySelectorAll(".card");
@@ -23,9 +25,7 @@ if (journeyTrack) {
     const gap = 16; // matches CSS margin (0.5rem * 2)
     const offset = journeyIndex * (cardWidth + gap);
 
-    currentOffset = -offset;
-    journeyTrack.style.transform = `translateX(${currentOffset}px)`;
-
+    journeyTrack.style.transform = `translateX(-${offset}px)`;
   }
 
   function nextJourney() {
@@ -48,78 +48,40 @@ if (journeyTrack) {
   window.addEventListener("load", updateJourneyCarousel);
   updateJourneyCarousel();
 
-  // ---------- iOS Direction-Locked Swipe ----------
-let startX = 0;
-let startY = 0;
-let endX = 0;
-let isDragging = false;
-let lockDirection = null;
+  // ---------- iOS Swipe Support ----------
+  let startX = 0;
+  let endX = 0;
 
-journeyTrack.addEventListener(
-  "touchstart",
-  (e) => {
-    const t = e.touches[0];
-    startX = t.clientX;
-    startY = t.clientY;
-    endX = startX;
-    lockDirection = null;
-    isDragging = true;
-  },
-  { passive: true }
-);
+  journeyTrack.addEventListener(
+    "touchstart",
+    (e) => {
+      startX = e.touches[0].clientX;
+      endX = startX;
+      journeyTrack.classList.add("is-swiping");
+    },
+    { passive: true }
+  );
 
-journeyTrack.addEventListener(
-  "touchmove",
-  (e) => {
-    if (!isDragging) return;
+  journeyTrack.addEventListener(
+    "touchmove",
+    (e) => {
+      endX = e.touches[0].clientX;
+      e.preventDefault(); // IMPORTANT: stop page scroll on iOS
+    },
+    { passive: false }
+  );
 
-    const t = e.touches[0];
-    const dx = t.clientX - startX;
-    const dy = t.clientY - startY;
-    endX = t.clientX;
+  journeyTrack.addEventListener("touchend", () => {
+    journeyTrack.classList.remove("is-swiping");
 
-    // Decide intent
-    if (!lockDirection) {
-      if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
-      lockDirection = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+    if (window.innerWidth >= 576) return;
+
+    const delta = endX - startX;
+    if (Math.abs(delta) > 50) {
+      delta < 0 ? nextJourney() : prevJourney();
     }
-
-    // Allow vertical scroll
-    if (lockDirection === "y") return;
-
-    // Horizontal swipe
-    e.preventDefault();
-    journeyTrack.classList.add("is-swiping");
-
-    // 🔥 THIS IS THE KEY LINE
-    journeyTrack.style.transform = `translateX(${currentOffset + dx}px)`;
-  },
-  { passive: false }
-);
-
-
-function endSwipe() {
-  journeyTrack.classList.remove("is-swiping");
-  isDragging = false;
-
-  if (lockDirection !== "x" || window.innerWidth >= 576) {
-    journeyTrack.style.transform = `translateX(${currentOffset}px)`;
-    return;
-  }
-
-  const delta = endX - startX;
-
-  if (Math.abs(delta) > 50) {
-    delta < 0 ? nextJourney() : prevJourney();
-  } else {
-    // 🔥 SNAP BACK if swipe was too small
-    journeyTrack.style.transform = `translateX(${currentOffset}px)`;
-  }
+  });
 }
-journeyTrack.addEventListener("touchend", endSwipe);
-journeyTrack.addEventListener("touchcancel", endSwipe);
-
-
 
   // ======================================================
   // FEATURED CAROUSEL (<768px only, auto slide)
