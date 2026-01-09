@@ -12,23 +12,25 @@ if (journeyTrack) {
   const journeyCards = journeyTrack.querySelectorAll(".card");
   let journeyIndex = 0;
 
-  function updateJourneyCarousel() {
+ function updateJourneyCarousel() {
   if (window.innerWidth >= 576) {
     journeyTrack.style.transform = "none";
     return;
   }
 
   const firstCard = journeyCards[0];
-  const secondCard = journeyCards[1];
+  const targetCard = journeyCards[journeyIndex];
 
-  if (!secondCard) return;
+  if (!firstCard || !targetCard) return;
 
-  const cardDistance =
-    secondCard.getBoundingClientRect().left -
-    firstCard.getBoundingClientRect().left;
+  const trackRect = journeyTrack.getBoundingClientRect();
+  const cardRect = targetCard.getBoundingClientRect();
 
-  journeyTrack.style.transform = `translateX(-${journeyIndex * cardDistance}px)`;
+  const offset = cardRect.left - trackRect.left;
+
+  journeyTrack.style.transform = `translateX(-${offset}px)`;
 }
+
 
 
   function nextJourney() {

@@ -167,8 +167,12 @@ section {
   margin: 0 auto;
   text-align: center;
 }
-
+a{
+  font-family: 'Poppins';
+}
 .about img {
+   display: block;
+  margin: 2rem auto;
   max-height: 500px;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
@@ -223,6 +227,7 @@ section {
 #featured-next { right: 0.5rem; }
 
 /* --- JOURNEY CAROUSEL --- */
+
 .carousel {
   position: relative;
   overflow: hidden;
