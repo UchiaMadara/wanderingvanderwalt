@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // ======================================================
-  // JOURNEY CAROUSEL (<576px only, infinite loop + swipe)
-  // ======================================================
-
+ 
   // ======================================================
 // JOURNEY CAROUSEL (<576px only, smooth iOS swipe FIXED)
 // ======================================================
@@ -16,17 +13,23 @@ if (journeyTrack) {
   let journeyIndex = 0;
 
   function updateJourneyCarousel() {
-    if (window.innerWidth >= 576) {
-      journeyTrack.style.transform = "none";
-      return;
-    }
-
-    const cardWidth = journeyCards[0].getBoundingClientRect().width;
-    const gap = 16; // matches CSS margin (0.5rem * 2)
-    const offset = journeyIndex * (cardWidth + gap);
-
-    journeyTrack.style.transform = `translateX(-${offset}px)`;
+  if (window.innerWidth >= 576) {
+    journeyTrack.style.transform = "none";
+    return;
   }
+
+  const firstCard = journeyCards[0];
+  const secondCard = journeyCards[1];
+
+  if (!secondCard) return;
+
+  const cardDistance =
+    secondCard.getBoundingClientRect().left -
+    firstCard.getBoundingClientRect().left;
+
+  journeyTrack.style.transform = `translateX(-${journeyIndex * cardDistance}px)`;
+}
+
 
   function nextJourney() {
     if (window.innerWidth >= 576) return;
@@ -47,7 +50,7 @@ if (journeyTrack) {
   window.addEventListener("resize", updateJourneyCarousel);
   window.addEventListener("load", updateJourneyCarousel);
   updateJourneyCarousel();
-
+/*
   // ---------- iOS Swipe Support ----------
   let startX = 0;
   let endX = 0;
@@ -81,6 +84,7 @@ if (journeyTrack) {
       delta < 0 ? nextJourney() : prevJourney();
     }
   });
+  */
 }
 
   // ======================================================

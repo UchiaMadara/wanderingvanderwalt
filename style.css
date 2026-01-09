@@ -1,13 +1,17 @@
 /* General */
 body {
   margin: 0;
-  font-family: "Dancing Script",'Poppins' sans-serif;
+  font-family: "Dancing Script",'Poppins', sans-serif;
   background: #fef3c7;
   color: #333;
 }
 
 h1, h2, h3 {
   font-family: 'Playfair Display', serif;
+}
+p{
+    font-family: sans-serif;
+    font-size: medium;
 }
 
 /* --- HEADER & HAMBURGER --- */
@@ -128,8 +132,8 @@ h1, h2, h3 {
   font-size: 1.8rem;
 }
 .hero-content{
-  font-size: 1rem;
-  font-weight: 900;
+  font-size: 0.7rem;
+  font-weight: 400;
 }
 .hero-buttons {
   display: flex;
@@ -158,10 +162,12 @@ section {
   padding: 4rem 1rem;
   text-align: center;
 }
-.about{
+.about {
   width: 80%;
-  justify-self: center;
+  margin: 0 auto;
+  text-align: center;
 }
+
 .about img {
   max-height: 500px;
   border-radius: 12px;
@@ -227,8 +233,8 @@ section {
 .carousel-inner {
   display: flex;
   transition: transform 0.5s ease;
-  touch-action: pan-y;
-  -webkit-overflow-scrolling: touch;
+  touch-action: none;
+  -webkit-overflow-scrolling: auto;
   will-change: transform;
 }
 
@@ -252,7 +258,6 @@ section {
 }
 #journey-prev { left: 10px; }
 #journey-next { right: 10px; }
-
 
 .learned {
   padding: 3rem 1rem;
