@@ -105,17 +105,24 @@ if (journeyTrack) {
   const autoSlideInterval = 2000;
   let autoSlideTimer = null;
 
-  function updateFeaturedCarousel() {
-    if (!featuredTrack || featuredLogos.length === 0) return;
+ function updateFeaturedCarousel() {
+  if (!featuredTrack || featuredLogos.length === 0) return;
 
-    if (window.innerWidth >= 768) {
-      featuredTrack.style.transform = "none";
-      return;
-    }
-
-    const logoWidth = featuredLogos[0].offsetWidth + 32;
-    featuredTrack.style.transform = `translateX(-${featuredIndex * logoWidth}px)`;
+  if (window.innerWidth >= 768) {
+    featuredTrack.style.transform = "none";
+    return;
   }
+
+  const targetLogo = featuredLogos[featuredIndex];
+  if (!targetLogo) return;
+
+  const trackRect = featuredTrack.getBoundingClientRect();
+  const logoRect = targetLogo.getBoundingClientRect();
+
+  const offset = logoRect.left - trackRect.left;
+  featuredTrack.style.transform = `translateX(-${offset}px)`;
+}
+
 
   function nextFeaturedSlide() {
     if (window.innerWidth >= 768) return;
