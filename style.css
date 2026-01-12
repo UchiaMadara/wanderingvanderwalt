@@ -5,9 +5,8 @@ body {
   background: #fef3c7;
   color: #333;
 }
-
-h1, h2, h3 {
-  font-family: 'Playfair Display', serif;
+h2{
+ font-family: 'Poppins', sans-serif;
 }
 p{
     font-family: sans-serif;
