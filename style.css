@@ -265,19 +265,6 @@ a{
 #journey-prev { left: 10px; }
 #journey-next { right: 10px; }
 
-.learned {
-  padding: 3rem 1rem;
-  background: #fff7ed;
-  text-align: center;
-}
-
-.learned h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: #333;
-  font-family: 'Playfair Display', serif;
-}
-
 /* Accordion */
 .learned {
   padding: 3rem 1rem;

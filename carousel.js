@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
  
   // ======================================================
-// JOURNEY CAROUSEL (<576px only, smooth iOS swipe FIXED)
+// JOURNEY CAROUSEL (<576px only, IOS button click)
 // ======================================================
 
 const journeyTrack = document.getElementById("journey-carousel");
