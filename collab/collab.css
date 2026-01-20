@@ -13,7 +13,7 @@ body {
   flex-direction: column;
   align-items: center;
   color : rgb(188, 129, 107);
-  margin-bottom: .7em;
+  margin-bottom: .7rem;
  
 }
 .hero > h1 {
@@ -42,22 +42,21 @@ body {
   justify-items: center;
   font-family: 'Poppins', sans-serif;
   font-size: small;
-  margin-bottom: .7em;
-    background-color: lightcoral;
+  
  }
 .featured > div > img {
   width : 70px;
   margin-right: 2px;
 }
 
+
+/* --- SKILLS ---*/
+
 #skills > h3{
   width: 80%;
   justify-self: center;
-  background-color: lightcoral;
   text-align: center;
 }
-
-/* --- SKILLS ---*/
 
 .carousel {
   position: relative;
@@ -86,6 +85,19 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   font-family: 'Poppins', sans-serif;
 }
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+}
 
 #journey-prev { left: 10px; }
 #journey-next { right: 10px; }
@@ -95,24 +107,74 @@ body {
 .testimonials{
   display: grid;
   justify-items: center;
+  margin-bottom: .7rem;
 }
 
 .testimonials > img{
   width: 80%;
 }
 
-/* --- CALL TO ACTION*/
+/* --- CALL TO ACTION --- */
 .cta{
-  display: grid;
-  width: 80%;
+  justify-items: center;
+  margin: 0 10%;
   text-align: center;
+   margin-bottom: .7rem;
 }
-.cta > h3 {
-  justify-self: center;
-  margin-bottom: 0;
-}
+
 /* --- CONTACT US --- */
 .contact{
-  display: grid;
+  justify-items: center;
   width: 80%;
+  text-align: center;
+  margin: 0 10%;
+  margin-bottom: 1rem;
+}
+.contact > p {
+  margin-bottom: -5px;
+}
+
+/* --- Section that qualifies companies --- */
+.qualify{
+  width: 80%;
+  justify-self: center;
+  text-align: center;
+}
+
+/* --- media queries section --- */
+@media (min-width: 768px) {
+
+  .card {
+   display: grid;
+   grid-template-rows: repeat(2, 40%);
+   grid-template-columns: repeat(2, 40%);
+  }
+
+  #skills > h3 {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1024px) {
+
+  .carousel {
+    overflow: visible;
+    padding: 0;
+  }
+
+  .carousel-inner {
+    transform: none !important;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .card {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .carousel-btn {
+    display: none;
+  }
 }

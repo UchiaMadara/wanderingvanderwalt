@@ -1,4 +1,5 @@
-const journeyTrack = document.getElementById("skills-carousel");
+document.addEventListener("DOMContentLoaded", () => {
+  const journeyTrack = document.getElementById("skills-carousel");
 const journeyPrev = document.getElementById("journey-prev");
 const journeyNext = document.getElementById("journey-next");
 
@@ -25,8 +26,6 @@ if (journeyTrack) {
   journeyTrack.style.transform = `translateX(-${offset}px)`;
 }
 
-
-
   function nextJourney() {
     if (window.innerWidth >= 576) return;
     journeyIndex = (journeyIndex + 1) % journeyCards.length;
@@ -46,6 +45,8 @@ if (journeyTrack) {
   window.addEventListener("resize", updateJourneyCarousel);
   window.addEventListener("load", updateJourneyCarousel);
   updateJourneyCarousel();
+
+}
 /*
   // ---------- iOS Swipe Support ----------
   let startX = 0;
@@ -80,4 +81,5 @@ if (journeyTrack) {
       delta < 0 ? nextJourney() : prevJourney();
     }
   });
-  */}
+  */
+});

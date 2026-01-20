@@ -210,19 +210,7 @@ a{
   transition: opacity 0.3s ease;
 }
 .featured-track img:hover { opacity: 1; }
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.4);
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  padding: 0.5rem 0.8rem;
-  cursor: pointer;
-  border-radius: 50%;
-  z-index: 10;
-}
+
 #featured-prev { left: 0.5rem; }
 #featured-next { right: 0.5rem; }
 
@@ -261,6 +249,19 @@ a{
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 0.5rem;
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
 }
 #journey-prev { left: 10px; }
 #journey-next { right: 10px; }
