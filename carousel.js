@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
- 
-  // ======================================================
+  
 // JOURNEY CAROUSEL (<576px only, IOS button click)
-// ======================================================
 
 const journeyTrack = document.getElementById("journey-carousel");
 const journeyPrev = document.getElementById("journey-prev");
@@ -52,6 +50,8 @@ if (journeyTrack) {
   window.addEventListener("resize", updateJourneyCarousel);
   window.addEventListener("load", updateJourneyCarousel);
   updateJourneyCarousel();
+
+  }
 /*
   // ---------- iOS Swipe Support ----------
   let startX = 0;
@@ -87,7 +87,7 @@ if (journeyTrack) {
     }
   });
   */
-}
+
 
   // ======================================================
   // FEATURED CAROUSEL (<768px only, auto slide)
