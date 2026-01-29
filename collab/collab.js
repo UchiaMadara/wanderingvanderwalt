@@ -7,37 +7,40 @@ if (journeyTrack) {
   const journeyCards = journeyTrack.querySelectorAll(".card");
   let journeyIndex = 0;
 
- function updateJourneyCarousel() {
+function updateJourneyCarousel() {
   if (window.innerWidth >= 576) {
-    journeyTrack.style.transform = "none";
+    journeyTrack.style.transform = "translateX(0)";
     return;
   }
 
-  const firstCard = journeyCards[0];
-  const targetCard = journeyCards[journeyIndex];
-
-  if (!firstCard || !targetCard) return;
-
-  const trackRect = journeyTrack.getBoundingClientRect();
-  const cardRect = targetCard.getBoundingClientRect();
-
-  const offset = cardRect.left - trackRect.left;
-
-  journeyTrack.style.transform = `translateX(-${offset}px)`;
+  journeyTrack.style.transform = `translateX(-${journeyIndex * 100}%)`;
 }
 
   function nextJourney() {
-    if (window.innerWidth >= 576) return;
-    journeyIndex = (journeyIndex + 1) % journeyCards.length;
-    updateJourneyCarousel();
-  }
+  if (window.innerWidth >= 576) return;
 
-  function prevJourney() {
-    if (window.innerWidth >= 576) return;
-    journeyIndex =
-      (journeyIndex - 1 + journeyCards.length) % journeyCards.length;
-    updateJourneyCarousel();
-  }
+  journeyTrack.style.transition = "none";
+  journeyTrack.offsetHeight; // force reflow
+
+  journeyIndex = (journeyIndex + 1) % journeyCards.length;
+
+  journeyTrack.style.transition = "transform 0.5s ease";
+  updateJourneyCarousel();
+}
+
+function prevJourney() {
+  if (window.innerWidth >= 576) return;
+
+  journeyTrack.style.transition = "none";
+  journeyTrack.offsetHeight;
+
+  journeyIndex =
+    (journeyIndex - 1 + journeyCards.length) % journeyCards.length;
+
+  journeyTrack.style.transition = "transform 0.5s ease";
+  updateJourneyCarousel();
+}
+
 
   if (journeyNext) journeyNext.addEventListener("click", nextJourney);
   if (journeyPrev) journeyPrev.addEventListener("click", prevJourney);
