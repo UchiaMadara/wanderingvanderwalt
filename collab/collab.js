@@ -16,6 +16,7 @@ function updateJourneyCarousel() {
   journeyTrack.style.transform = `translateX(-${journeyIndex * 100}%)`;
 }
 
+
   function nextJourney() {
   if (window.innerWidth >= 576) return;
 
