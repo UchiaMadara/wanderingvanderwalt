@@ -221,7 +221,6 @@ a{
   overflow: hidden;
   max-width: 900px;
   margin: auto;
-  overscroll-behavior: contain;
 }
 .carousel-inner {
   display: flex;

@@ -14,3 +14,5 @@ Landing page sections
 -resources
 -world school
 -contact + sign up
+
+on screens 1020px + make the bottom of the work with us page testimonial and CTA section side by side that will cover the void spaces and make the page smaller and easier to use.
