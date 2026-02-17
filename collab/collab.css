@@ -12,16 +12,23 @@ a {
 /*  --- HERO ---  */
 .hero {
   position: relative;
-  height: 34vh;
-  text-align: center;
+  height: 34vh; /* increase height */
+  background-image: url("../images/imageCollab.PNG");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  color : rgb(232, 229, 228);
+  justify-content: space-between;
+  text-align: center;
+  color: rgb(232, 229, 228);
 }
+
 .hero > h1 {
   font-family: "Dancing Script", sans-serif;
-  margin-top: 1.3rem;
+  margin-top: 1.2rem;
   font-size: 2.3em;
   width: 80vw;
 }
@@ -85,7 +92,6 @@ a {
   display: flex;
   justify-content: flex-start; 
   transition: transform 0.5s ease;
-  touch-action: pan-x;
   -webkit-overflow-scrolling: auto;
   will-change: transform;
 }
@@ -134,7 +140,7 @@ a {
   
 }
 .testimonials > img{
-  width: 80%;
+  width: 90%;
 }
 .testimonials > h2 {
   align-self: center;
@@ -198,7 +204,10 @@ a {
 
 /* --- media queries section --- */
 @media (min-width: 600px) {
-
+ 
+  .hero > h1{
+    font-size: 3em;
+  }
   .featured{
   height: 200px;
  }
@@ -248,18 +257,18 @@ a {
 @media (min-width: 1020px) {
 
   .hero{
-    height: 50vh;
+    height: 78vh;
   }
 
   .hero > h1 {
   margin-top: 2rem;
   width: 80vw;
-  font-size: 4rem;
-
+  font-size: 5em;
+  color: ffffff;
 }
 .hero > h3{
  margin-top: 6rem;
- font-size: 1.3rem;
+ font-size: 1.5em;
 }
  .featured{
   height: 200px;
@@ -267,7 +276,60 @@ a {
 .featured-logo > img {
   width:120px
 }
+/* --- skills --- */
+  #skills {
+    display: grid;
+    width:100%;
+    margin-left: 1%;
+  }
+  .carousel-inner {
+    display: grid;
+    grid-template-columns: repeat(4 , 24%);
+    transform: none !important;
+    gap: .5rem ;
+    height: 100%;
+  }
+  .card{
+    margin: 0;
+    padding-bottom: 0;
+  }
+  .card > ul{
 
+    margin-top: -0.3rem;
+  }
+  .carousel-btn {
+    display: none;
+  }
+
+  .brands-CTA{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 0;
+  margin: 3rem 3%;
+  }
+  .cta-script{
+    width: 100%;
+    font-size: 1.3em;
+    ;
+  }
+.testimonials > img{
+  width: 500px;
+  margin: 0
+};
+.testimonials,
+.cta {
+  width: 100%;
+  height: 400px;
+}
+.cta > h3{
+  justify-self: center;
+  margin-top: 0;
+  font-size: 1.6em;
+}
+.cta{
+  align-self: center;
+}
 .adLinks{
   width: 80%;
   justify-self: center;
