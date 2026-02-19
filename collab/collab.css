@@ -23,8 +23,20 @@ a {
   align-items: center;
   justify-content: space-between;
   text-align: center;
-  color: rgb(232, 229, 228);
+  color: white;
 }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3); /* 30% black overlay ≈ 70% brightness */
+  z-index: 0;
+}
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
 
 .hero > h1 {
   font-family: "Dancing Script", sans-serif;
